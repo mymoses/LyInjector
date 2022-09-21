@@ -14,7 +14,7 @@
 
 <br><br>
 
-## ShellCode 注入工具
+## ShellCode 本地注入工具
 
 ShellInject 是一款通用ShellCode后门注入器，该工具主要用于在后渗透阶段使用，可将后门直接注入到特定进程内存中而不会在磁盘中留下任何痕迹，注入成功后Metasploit即可获取控制权，只要对端不关机则权限会维持，由于内存注入无对应磁盘文件，所以也不会触发杀软报毒。
 
@@ -160,7 +160,7 @@ C:\Users\admin\Desktop> sc32.exe EncodeInFile --path d://encode.txt --passwd lys
 C:\Users\admin\Desktop> sc32.exe EncodePidInFile --pid 17480 --path d://encode.txt --passwd lyshark
 ```
 
-## LySocket 远程ShellCode远控
+## ShellCode 远程注入工具
 
 LySocket 是一款使用纯WindowsAPI实现的命令行版远程控制工具，该工具通过最少的代码实现了套接字的批量管理操作，用户可以指定对特定进程进行远程注入，只要对端客户端能一直运行，则MSF攻击载荷可以很方便的注入并被运行。
 ```C
