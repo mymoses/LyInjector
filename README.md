@@ -166,6 +166,32 @@ C:\Users\admin\Desktop> sc32.exe EncodePidInFile --pid 17480 --path d://encode.t
 
 LySocket 是一款使用纯WindowsAPI实现的命令行版远程控制工具，该工具通过最少的代码实现了套接字的批量管理操作，用户可以指定对特定进程进行远程注入，只要对端客户端能一直运行，则MSF攻击载荷可以很方便的注入并被运行。
 
+目前LySocket支持如下命令：
+```C
+[ LySocket ] # help
+ _            ____             _        _
+| |   _   _  / ___|  ___   ___| | _____| |_
+| |  | | | | \___ \ / _ \ / __| |/ / _ \ __|
+| |__| |_| |  ___) | (_) | (__|   <  __/ |_
+|_____\__, | |____/ \___/ \___|_|\_\___|\__|
+      |___/
+
+Usage: LySocket 演示版
+Email: me@lyshark.com
+Optional:
+
+         --ShowSocket        输出所有上线客户端
+         --GetCPU            获取客户端CPU数据
+         --GetMemory         获取客户端内存数据
+         --GetProcessList    获取客户端正在运行进程列表
+         --InjectSelfCode    将ShellCode注入到客户端内
+         --InjectRemoteCode  将ShellCode注入到客户端指定进程内
+         --CloseServer       正常退出服务端
+         --Exit              退出远程客户端
+```
+
+
+
 
 
 
