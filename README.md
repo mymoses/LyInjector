@@ -164,5 +164,9 @@ C:\Users\admin\Desktop> sc32.exe EncodePidInFile --pid 17480 --path d://encode.t
 
 # LySocket 远程注入远控
 
+LySocket 是一款使用纯WindowsAPI实现的命令行版远程控制工具，该工具通过最少的代码实现了套接字的批量管理操作，用户可以指定对特定进程进行远程注入，只要对端客户端能一直运行，则MSF攻击载荷可以很方便的注入并被运行。
+
+
+
 
 
