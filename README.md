@@ -161,3 +161,8 @@ C:\Users\admin\Desktop> sc32.exe EncodeInFile --path d://encode.txt --passwd lys
 ```
 C:\Users\admin\Desktop> sc32.exe EncodePidInFile --pid 17480 --path d://encode.txt --passwd lyshark
 ```
+
+# LySocket 远程注入远控
+
+
+
