@@ -235,3 +235,5 @@ InjectShellCode32.exe EncodePidInFile --pid 8384 --path d://xor_shellcode.txt --
 [+] 已设置权限: 12451840
 [*] 创建线程ID => 356
 ```
+
+GitHUB地址：https://github.com/lyshark/ShellCodeInject
