@@ -3,9 +3,9 @@
 <br>
 
 <div align=center>
- 
-![logo](https://user-images.githubusercontent.com/52789403/185021479-1816c5bc-2ad4-4d54-beca-08ba5e3b3253.png)
- 
+
+![logo](https://user-images.githubusercontent.com/52789403/224480312-b1fcc961-df7a-45b5-ae1f-5f9dc8134f18.PNG)
+
 </div>
 
 <br>
