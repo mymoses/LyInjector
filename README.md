@@ -26,6 +26,8 @@
 
 ## API 接口调用
 
+![image](https://user-images.githubusercontent.com/52789403/224482027-0e9e4490-dcbf-4eff-8940-c57abb1064c9.png)
+
 本工具绿色无毒，下载后可将`LyInjector.exe`源程序拷贝到`C:\Windows\System32`目录下，方便用户在任何位置都可以直接调用，目前该工具具备`23`个子功能，如下是详细的功能参数列表。
 ```c
 Microsoft Windows [版本 10.0.19042.1826]
