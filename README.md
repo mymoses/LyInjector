@@ -10,6 +10,14 @@
 
 <br>
 
+<div align=center>
+
+[![Build status](https://cdn.lyshark.com/archive/LyScript/build.svg)](https://github.com/lyshark/LyMemory) [![Crowdin](https://cdn.lyshark.com/archive/LyScript/email.svg)](mailto:me@lyshark.com)  [![OSCS Status](https://cdn.lyshark.com/archive/LyScript/OSCS.svg)](https://www.oscs1024.com/project/lyshark/LyMemory?ref=badge_small)
+
+</div>
+
+<br>
+
 一款本地`ShellCode`后门注入工具，工具主要用于在后渗透阶段使用，可将后门直接注入到特定进程内存中而不会在磁盘中留下任何痕迹，注入成功后`Metasploit`即可获取控制权，只要对端不关机则权限会一直维持，由于内存注入无对应磁盘文件，所以也不会触发杀软报毒。
 
 首先需要通过`Metasploit`工具生成一个有效载荷，如下是32位与64位载荷生成命令。
