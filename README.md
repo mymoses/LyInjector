@@ -84,6 +84,75 @@ C:\Users\admin>LyInjector
 ```
 
 
+- 显示当前所有可注入进程
+
+```c
+C:\Users\admin> LyInjector Show
+
+[*] PID：     4 | 位数：x64 | 进程名：System
+[*] PID：   124 | 位数：x64 | 进程名：Registry
+[*] PID：   588 | 位数：x64 | 进程名：smss.exe
+[*] PID：   872 | 位数：x64 | 进程名：csrss.exe
+[*] PID：   972 | 位数：x64 | 进程名：wininit.exe
+[*] PID：   980 | 位数：x64 | 进程名：csrss.exe
+[*] PID：   496 | 位数：x64 | 进程名：services.exe
+[*] PID：  6624 | 位数：x32 | 进程名：lyshark.exe
+[*] PID：  9196 | 位数：x64 | 进程名：SearchProtocolHost.exe
+[*] PID： 11376 | 位数：x64 | 进程名：LyInjector.exe
+```
+
+- 显示进程内的所有DLL模块
+
+```c
+C:\Users\admin> LyInjector ShowDll --proc lyshark.exe
+
+[+] DLL名称:           USER32.dll | DLL基地址: 0x0000000076B70000
+[+] DLL名称:        MSVCR120D.dll | DLL基地址: 0x000000006A3E0000
+[+] DLL名称:         KERNEL32.dll | DLL基地址: 0x00000000773A0000
+```
+
+- 尝试提升自身进程权限
+
+```c
+C:\Users\admin> LyInjector Promote
+
+[+] 获取自身Token
+[+] 查询进程特权
+[*] 已提升为超级管理员
+```
+
+- 尝试卸载指定进程内的DLL模块
+
+```c
+C:\Users\admin> LyInjector FreeDll --proc lyshark.exe --dll MSVCR120D.dll
+
+[*] 模块卸载状态: 1
+```
+
+- 显示进程内特定模块内函数基址
+
+```c
+C:\Users\admin> LyInjector GetFuncAddr --proc lyshark.exe --dll user32.dll --func MessageBoxA
+
+[+] 函数地址: 0x76bf0ba0
+
+C:\Users\admin> LyInjector GetFuncAddr --proc lyshark.exe --dll user32.dll --func MessageBoxW
+
+[+] 函数地址: 0x76bf10c0
+```
+
+- 将攻击载荷格式化为一行纯字符串
+
+```c
+"\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x64\x8b\x52\x30\x8b\x52"
+"\x0c\x89\xe5\x8b\x52\x14\x31\xff\x0f\xb7\x4a\x26\x8b\x72\x28"
+"\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5";
+
+C:\Users\admin> LyInjector Format --path d://shellcode.txt
+
+fce88f0000006031d2648b52308b520c89e58b521431ff0fb74a268b7228f0b5a2566a0053ffd5
+```
+
 
 
 
