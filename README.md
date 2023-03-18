@@ -29,6 +29,33 @@
 ![image](https://user-images.githubusercontent.com/52789403/224482027-0e9e4490-dcbf-4eff-8940-c57abb1064c9.png)
 
 本工具绿色无毒，下载后可将`LyInjector.exe`源程序拷贝到`C:\Windows\System32`目录下，方便用户在任何位置都可以直接调用，目前该工具具备`23`个子功能，如下是详细的功能参数列表。
+
+|: ---- :|: ---- :|
+| Show              | 显示当前所有可注入进程 |
+| ShowDll           | 显示进程内的所有DLL模块 |
+| Promote           | 尝试提升自身进程权限 |
+| FreeDll           | 尝试卸载指定进程内的DLL模块 |
+| GetFuncAddr       | 显示进程内特定模块内函数基址 |
+| Delself           | 从系统中删除自身痕迹 |
+| Format            | 将字节数组格式化为一行并打印 |
+| FormatFile        | 将字节数组格式化并写出到文件 |
+| Xor               | 将文本中压缩后的字节数组进行异或并输出 |
+| Xchg              | 将压缩后的字符串转为字节数组格式 |
+| XorArray          | 将字节数组加密/解密为字节数组格式 |
+| InjectDLL         | 注入DLL模块到特定进程内 |
+| InjectSelfShell   | 注入字符串到自身进程并运行 |
+| InjectArrayByte   | 注入字节数组到自身进程并运行 |
+| FileInjectShell   | 从文件中读入字符串并注入运行 |
+| InjectProcShell   | 注入字符串到远程进程并运行 |
+| InjectWebShell    | 从远程加载字符串并注入自身进程 |
+| AddSection        | 在PE文件中新增一个节区 |
+| InsertShellCode   | 将ShellCode插入到PE中的指定位置处 |
+| RepairShellOep    | 在ShellCode末尾增加跳转回原处的指令 |
+| SetSigFlag        | 设置文件感染标志 |
+| EncodeInFile      | 从文件读入加密字符串并执行反弹 |
+| EncodePidInFile   | 注入加密后的字符串到远程进程中 |
+
+
 ```c
 Microsoft Windows [版本 10.0.19042.1826]
 (c) Microsoft Corporation。保留所有权利。
