@@ -87,7 +87,15 @@ msf6 exploit(multi/handler) > exploit
 
 <br>
 
-- Show 显示当前所有可注入进程
+## 命令使用参数
+
+**Show** LyInjector工具的子命令之一，用于显示当前所有可注入的进程。通过该命令可以快速获取当前系统内所有正在运行的进程列表，方便后续的注入操作。注入DLL模块或ShellCode时需要指定目标进程的PID，使用Show命令可以快速查看目标进程的PID，减少手动查找的时间和工作量。
+
+以下是Show功能的基本实现步骤：
+
+ - 获取系统中所有进程的ID和名称；
+ - 遍历每个进程，判断该进程是否可以被注入；
+ - 如果该进程可以被注入，则将其ID和名称输出；
 
 ```c
 C:\Users\admin> LyInjector Show
@@ -104,7 +112,7 @@ C:\Users\admin> LyInjector Show
 [*] PID： 11376 | 位数：x64 | 进程名：LyInjector.exe
 ```
 
-- ShowDll 显示进程内的所有DLL模块
+**ShowDll** 是一个命令行工具，它可以列出指定进程中加载的所有动态链接库（DLL）模块的名称、版本、内存地址等详细信息。这个工具可以帮助开发人员和系统管理员查看进程中加载的DLL模块，以便诊断和调试问题，也可以用于安全审计和恶意软件检测，以便发现潜在的安全问题。通过ShowDll，用户可以获得有关进程中加载的所有DLL模块的重要信息，这对于深入了解进程行为和优化系统性能都非常有用。
 
 ```c
 C:\Users\admin> LyInjector ShowDll --proc lyshark.exe
@@ -114,7 +122,11 @@ C:\Users\admin> LyInjector ShowDll --proc lyshark.exe
 [+] DLL名称:         KERNEL32.dll | DLL基地址: 0x00000000773A0000
 ```
 
-- Promote 尝试提升自身进程权限
+**Promote** 尝试提升自身进程权限，进程权限是指进程在操作系统中的权限级别，不同的权限级别可以让进程执行不同的操作。通常情况下，进程的权限级别与执行它的用户权限级别相同。但是，有时候我们需要在一个低权限的进程中执行高权限的操作，这时就需要提升进程权限。
+
+在Windows操作系统中，进程权限级别可以分为以下几个等级（从高到低）：System、Administrator、User、Guest。提升进程权限的过程就是将进程的权限级别从当前级别提升到更高的级别，例如从User级别提升到Administrator级别。
+
+提升进程权限需要具备一定的系统漏洞或利用技术，一般情况下，需要借助一些工具或者代码来实现。在本工具中，使用的是提权DLL的方式，通过载入提权DLL，来实现提升自身进程的权限级别。
 
 ```c
 C:\Users\admin> LyInjector Promote
@@ -124,7 +136,7 @@ C:\Users\admin> LyInjector Promote
 [*] 已提升为超级管理员
 ```
 
-- FreeDll 尝试卸载指定进程内的DLL模块
+**FreeDll** FreeDll命令，它尝试卸载指定进程内的动态链接库（DLL）模块。通过FreeDll，用户可以释放一个已经被加载的DLL模块，以便重新加载更新后的DLL模块或者解决一些资源泄漏问题。然而需要注意的是，尝试卸载一个正在被使用的DLL模块可能会导致不可预测的系统行为，因此用户在使用FreeDll时需要谨慎操作。同时，FreeDll也可以用于安全审计和恶意软件检测，以便发现并解决恶意软件使用的DLL注入和劫持等问题。
 
 ```c
 C:\Users\admin> LyInjector FreeDll --proc lyshark.exe --dll MSVCR120D.dll
@@ -132,7 +144,7 @@ C:\Users\admin> LyInjector FreeDll --proc lyshark.exe --dll MSVCR120D.dll
 [*] 模块卸载状态: 1
 ```
 
-- GetFuncAddr 显示进程内特定模块内函数基址
+**GetFuncAddr** GetFuncAddr命令，它可以显示指定进程内特定模块内函数的基址（地址）。通过GetFuncAddr，用户可以获得特定模块内函数的内存地址信息，这对于一些需要直接访问特定函数的开发和调试任务非常有用。同时，GetFuncAddr也可以用于安全审计和恶意软件检测，以便发现和分析恶意软件使用的特定函数或者API调用。但需要注意的是，GetFuncAddr仅能显示进程中已经加载的模块和函数的基址信息，如果需要查找未加载的模块或者函数，则需要使用其他工具或方法。
 
 ```c
 C:\Users\admin> LyInjector GetFuncAddr --proc lyshark.exe --dll user32.dll --func MessageBoxA
